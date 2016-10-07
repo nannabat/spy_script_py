@@ -2,7 +2,12 @@ import psutil
 import subprocess
 def ip_to_hostname(ip_addr):
   cmd_hostname = 'nslookup ' + ip_addr
-  nslkup_output = subprocess.check_output(cmd_hostname,shell=True)
+  try:
+  	nslkup_output = subprocess.check_output(cmd_hostname,shell=True)
+  	return nslkup_output
+  except subprocess.CalledProcessError:
+	return ip_addr
+  	
 
 
 def get_active_connections():
