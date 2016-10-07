@@ -3,7 +3,6 @@ import subprocess
 def ip_to_hostname(ip_addr):
   cmd_hostname = 'nslookup ' + ip_addr
   nslkup_output = subprocess.check_output(cmd_hostname,shell=True)
-  
 
 
 def get_active_connections():
@@ -51,8 +50,8 @@ def get_active_connections():
   #print active_connections
   return active_connections
 
-connections = get_active_connections()
-all = {'active_connections':connections}
-print all
+# connections = get_active_connections()
+# all = {'active_connections':connections}
+# #print all
 
 #print json.dumps(all, indent=4)
