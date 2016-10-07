@@ -4,7 +4,10 @@ def ip_to_hostname(ip_addr):
   cmd_hostname = 'nslookup ' + ip_addr
   try:
   	nslkup_output = subprocess.check_output(cmd_hostname,shell=True)
-  	return nslkup_output
+    for word in nslkup_output:
+      if word == 'Non-authoritative answer:':
+        remote_hostname = nslkup_output[4].split('\t')[1].replace('name = ','')
+        return remote_hostname
   except subprocess.CalledProcessError:
     return ip_addr
   	
@@ -38,6 +41,7 @@ def get_active_connections():
         tmp_active_connection['Remote-Port'] = 'Null'
       else:
         tmp_active_connection['RemoteIP'] = connection.raddr[0]
+        #tmp_active_connection['RemoteAddr'] = ip_to_hostname(connection.raddr[0])
         tmp_active_connection['Remote-Port'] = connection.raddr[1]
         
     else:
@@ -49,6 +53,7 @@ def get_active_connections():
         tmp_active_connection['Remote-Port'] = 'Null'
       else:
         tmp_active_connection['RemoteIP'] = connection.raddr[0]
+        #tmp_active_connection['RemoteAddr'] = ip_to_hostname(connection.raddr[0])
         tmp_active_connection['Remote-Port'] = connection.raddr[1]
         
     active_connections.append(tmp_active_connection)
