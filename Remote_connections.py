@@ -4,10 +4,10 @@ def ip_to_hostname(ip_addr):
   cmd_hostname = 'nslookup ' + ip_addr
   try:
   	nslkup_output = subprocess.check_output(cmd_hostname,shell=True)
-    for word in nslkup_output:
-      if word == 'Non-authoritative answer:':
-        remote_hostname = nslkup_output[4].split('\t')[1].replace('name = ','')
-        return remote_hostname
+        for word in nslkup_output:
+      		if word == 'Non-authoritative answer:':
+        		remote_hostname = nslkup_output[4].split('\t')[1].replace('name = ','')
+        		return remote_hostname
   except subprocess.CalledProcessError:
     return ip_addr
   	

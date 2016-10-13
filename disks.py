@@ -1,4 +1,5 @@
 import psutil
+from pprint import pprint
 partions = psutil.disk_partitions()
 dev_to_mnt_point_dict = {}
 dev_to_disk_space = {}
@@ -23,4 +24,5 @@ for dev, mnt_point in dev_to_mnt_point_dict.iteritems():
   disk_stats = [mnt_point_dict,disk_dict,used_per_dict]
   dev_to_disk_space['DeviceID: '+dev] = disk_stats
 
-print dev_to_disk_space
+#pprint(dev_to_disk_space)
+return dev_to_disk_space
