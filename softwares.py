@@ -25,9 +25,9 @@ for software in softwares:
          software_details_dict = {}
          # version_vendor_list = [{'version':software_to_version[software]},{'vendor':software_to_vendor[software]}]
          # software_to_version_vendor['product_name: ' +  software]=version_vendor_list
-         software_details_dict{'ProductName:'} = software
-         software_details_dict{'Version:'} = software_to_version[software]
-         software_details_dict{'Vendor'} = software_to_vendor[software]
+         software_details_dict['ProductName:'] = software
+         software_details_dict['Version:'] = software_to_version[software]
+         software_details_dict['Vendor'] = software_to_vendor[software]
          return_software_list.append(software_details_dict)
 
 
