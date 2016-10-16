@@ -70,7 +70,7 @@ def get_disks_info():
     disk_dict = {}
     used_per_dict = {}
     mnt_point_dict['mount_point'] = mnt_point  
-    disk_dict['Total_disk'] = total_disk
+    disk_dict['Total_disk'] = kb_to_gb(total_disk)
     used_per_dict['Percent_used'] = usage_percent
     disk_stats = [mnt_point_dict,disk_dict,used_per_dict]
     dev_to_disk_space['DeviceID: '+dev] = disk_stats
@@ -312,7 +312,7 @@ def get_softwares_info():
 def get_tm():
        a = datetime.datetime.now()
        return str(a)
-#var100 = get_tm()
+var100 = get_tm()
 
 
 #21) For getiing family-type of the system
