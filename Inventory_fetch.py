@@ -1,6 +1,6 @@
 import Inventory_functions
 from pprint import pprint
-Inventory_list = ['Disks','DNSHostName','Domain','ReportDateTime','Manufacturer','Model','NumberOfLogicalProcessors','NumberOfProcessors','Softwares']
+Inventory_list = ['Disks','SystemFamily','DNSHostName','Domain','ReportDateTime','Manufacturer','Model','NumberOfLogicalProcessors','NumberOfProcessors','Softwares']
 Inventory_list.sort()
 value_set = {}
 return_dict_all_values = {}
@@ -13,7 +13,7 @@ value_set['Manufacturer'] = Inventory_functions.get_mani()
 value_set['Model'] = Inventory_functions.get_mod()
 value_set['NumberOfLogicalProcessors'] = Inventory_functions.get_proc1()
 value_set['NumberOfProcessors'] = Inventory_functions.get_proc2()
-
+value_set['SystemFamily'] = Inventory_functions.get_fami()
 value_set['DNSHostName'] = Inventory_functions.get_dom()
 for value in Inventory_list:
         Disks = Inventory_functions.get_disks_info()
