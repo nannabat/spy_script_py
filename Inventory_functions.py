@@ -196,7 +196,7 @@ def get_os():
       Version = platform.version()
       x = platform.linux_distribution()
       y = x[0]
-      full = {'OperatingSystem': [{'Description':Description, 'ProductName':y, 'Machine':Machine, 'Processor':Processor, 'System OS':SystemOS, 'Release':Release}]}
+      full = [{'Description':Description, 'ProductName':y, 'Machine':Machine, 'Processor':Processor, 'System OS':SystemOS, 'Release':Release}]
       #sys = platform.system()
       return full
 #var11 = get_os() 
