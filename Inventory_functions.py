@@ -188,8 +188,17 @@ def get_desc_nic():
 #13)For getting systemos
 
 def get_os():
-      sys = platform.system()
-      return sys
+      Description = platform.platform()
+      Machine = platform.machine()
+      Processor = platform.processor()
+      SystemOS = platform.system()
+      Release = platform.release()
+      Version = platform.version()
+      x = platform.linux_distribution()
+      y = x[0]
+      full = {'OperatingSystem': [{'Description':Description, 'ProductName':y, 'Machine':Machine, 'Processor':Processor, 'System OS':SystemOS, 'Release':Release}]}
+      #sys = platform.system()
+      return full
 #var11 = get_os() 
 
 
