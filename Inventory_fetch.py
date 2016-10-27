@@ -1,6 +1,6 @@
 import Inventory_functions
 from pprint import pprint
-Inventory_list = ['Disks','SystemFamily','DNSHostName','Domain','ReportDateTime','Manufacturer','Model','NumberOfLogicalProcessors','NumberOfProcessors','Softwares']
+Inventory_list = ['Disks','SystemFamily','DNSHostName','Domain','ReportDateTime','Manufacturer','Model','NumberOfLogicalProcessors','NumberOfProcessors','Softwares','OperatingSystem']
 Inventory_list.sort()
 value_set = {}
 return_dict_all_values = {}
