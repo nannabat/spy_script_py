@@ -9,6 +9,7 @@ import os
 
 
 dict_nics_info = {}
+nic_list_with_conf = []
 
 def get_nics():
     cmd_ifconfig_1="ifconfig -a | sed 's/[ \t].*//;/^$/d'"
@@ -22,6 +23,12 @@ def check_nic_conf_file():
         path = "/etc/sysconfig/network-scripts/" + "ifcfg-" + a_nic.replace(':','')
         value = os.path.isfile(path)
         print path + " " + str(value)
+        if value:
+            nic_list_with_conf.add(a_nic)
+            conf_file = open(path,'r')
+            print conf_file
+
+
 
     
 
@@ -35,7 +42,7 @@ new_nic_list = get_nics()
 print new_nic_list
 check_nic_conf_file()
 
-for new_nic in new_nic_list:
+for new_nic in new_nic_list_with_conf:
     new_correct_nic = new_nic.replace(':',"")
     #print new_correct_nic
 
