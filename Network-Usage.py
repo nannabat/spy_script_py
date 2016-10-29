@@ -5,6 +5,8 @@ import json
 import socket
 import fcntl
 import struct
+import os
+
 
 dict_nics_info = {}
 
@@ -14,11 +16,23 @@ def get_nics():
     list_of_nics = str_of_nics.splitlines()
     return list_of_nics
 
+def check_nic_conf_file():
+    check_nics  = get_nics()
+    for a_nic in check_nics:
+        path = "/etc/sysconfig/network-scripts/" + "ifcfg-" + a_nic
+        print path + " " + os.path.isfile(path)
+
+    
+
+
+
 
 new_nic_list = get_nics()
 
 
+
 print new_nic_list
+check_nic_conf_file()
 
 for new_nic in new_nic_list:
     new_correct_nic = new_nic.replace(':',"")
