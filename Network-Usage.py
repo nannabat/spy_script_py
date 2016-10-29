@@ -24,9 +24,14 @@ def check_nic_conf_file():
         value = os.path.isfile(path)
         print path + " " + str(value)
         if value:
-            nic_list_with_conf.add(a_nic)
+            nic_list_with_conf.append(a_nic)
             conf_file = open(path,'r')
-            print conf_file
+            config = conf_file.read()
+            print config
+            return_value = config.rfind('BOOTPROTO=dhcp')
+            if return_value != -1:
+               print 'DHCP enabled for ' + a_nic
+            
 
 
 
@@ -42,7 +47,7 @@ new_nic_list = get_nics()
 print new_nic_list
 check_nic_conf_file()
 
-for new_nic in new_nic_list_with_conf:
+for new_nic in nic_list_with_conf:
     new_correct_nic = new_nic.replace(':',"")
     #print new_correct_nic
 
