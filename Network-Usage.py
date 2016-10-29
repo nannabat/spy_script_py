@@ -19,8 +19,9 @@ def get_nics():
 def check_nic_conf_file():
     check_nics  = get_nics()
     for a_nic in check_nics:
-        path = "/etc/sysconfig/network-scripts/" + "ifcfg-" + a_nic
-        print path + " " + os.path.isfile(path)
+        path = "/etc/sysconfig/network-scripts/" + "ifcfg-" + a_nic.replace(':','')
+        value = os.path.isfile(path)
+        print path + " " + str(value)
 
     
 
