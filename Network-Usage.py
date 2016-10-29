@@ -9,7 +9,7 @@ import os
 
 
 dict_nics_info = {}
-nic_list_with_conf = []
+
 
 def get_nics():
     cmd_ifconfig_1="ifconfig -a | sed 's/[ \t].*//;/^$/d'"
@@ -17,20 +17,24 @@ def get_nics():
     list_of_nics = str_of_nics.splitlines()
     return list_of_nics
 
-def check_nic_conf_file():
-    check_nics  = get_nics()
-    for a_nic in check_nics:
-        path = "/etc/sysconfig/network-scripts/" + "ifcfg-" + a_nic.replace(':','')
+def nics_with_config():
+    all_nics = get_nics()
+    nic_list_with_conf = []
+    for nic in all_nics:
+        path = "/etc/sysconfig/network-scripts/" + "ifcfg-" + nic.replace(':','')
         value = os.path.isfile(path)
-        print path + " " + str(value)
         if value:
-            nic_list_with_conf.append(a_nic)
-            conf_file = open(path,'r')
-            config = conf_file.read()
-            print config
-            return_value = config.rfind('BOOTPROTO=dhcp')
-            if return_value != -1:
-               print 'DHCP enabled for ' + a_nic
+            nic_list_with_conf.append(nic.replace(':',''))
+    return nic_list_with_conf
+
+def check_nic_conf_file(calling_nic):
+    path_config = "/etc/sysconfig/network-scripts/" + "ifcfg-" + calling_nic
+    conf_file = open(path,'r')
+    config = conf_file.read()
+    print config
+    return_value = config.rfind('BOOTPROTO=dhcp')
+    if return_value != -1:
+        print 'DHCP enabled for ' + a_nic
             
 
 
@@ -40,17 +44,20 @@ def check_nic_conf_file():
 
 
 
-new_nic_list = get_nics()
+# new_nic_list = get_nics()
 
 
 
-print new_nic_list
-check_nic_conf_file()
+# print new_nic_list
+# check_nic_conf_file()
 
-for new_nic in nic_list_with_conf:
-    new_correct_nic = new_nic.replace(':',"")
+outer_nic_list_with_conf = nics_with_config()
+
+for new_nic in outer_nic_list_with_conf:
+    #new_correct_nic = new_nic.replace(':',"")
     #print new_correct_nic
-
+    new_correct_nic = new_nic
+    check_nic_conf_file(new_correct_nic)
     cmd = 'ifconfig ' + new_correct_nic
 
     output_ifconfig = subprocess.check_output(cmd,shell=True)
