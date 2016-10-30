@@ -29,13 +29,12 @@ def nics_with_config():
 
 def check_nic_conf_file(calling_nic):
     path_config = "/etc/sysconfig/network-scripts/" + "ifcfg-" + calling_nic
-    conf_file = open(path,'r')
+    conf_file = open(path_config,'r')
     config = conf_file.read()
     print config
     return_value = config.rfind('BOOTPROTO=dhcp')
     if return_value != -1:
-        print 'DHCP enabled for ' + a_nic
-            
+        print 'DHCP enabled for ' + calling_nic            
 
 
 
