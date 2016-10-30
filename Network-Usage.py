@@ -86,6 +86,7 @@ def nics_report():
                 if 'ether' in line:
                     dict_ether_mac = {}
                     ether_mac_line = line.split()
+                    print ether_mac_line
                     dict_ether_mac[ether_mac_line[0]] = str(ether_mac_line[1])
                     mac_rx_tx.append(dict_ether_mac)
                 if 'RX' in line and ('packets' in line):
