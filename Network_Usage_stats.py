@@ -76,6 +76,7 @@ def nics_report():
 
         mac_rx_tx = []
         dhcp_stat_dict = {}
+        ht_name_dict = {}
 
         for output_line in output_ifconfig_list:
             nic_line_list = output_line.splitlines()
@@ -107,7 +108,8 @@ def nics_report():
                     mac_rx_tx.append(tx_bytes)
         dhcp_stat_dict['DHCP status'] = check_nic_conf_file(new_nic)
         mac_rx_tx.append(dhcp_stat_dict)
-        mac_rx_tx.append(get_hostname)
+        ht_name_dict['Hostname'] = get_hostname()
+        mac_rx_tx.append(ht_name_dict)
         dict_nics_info[new_correct_nic] = mac_rx_tx
     return dict_nics_info
 #print json.dumps(nics_report(),indent = 4)
