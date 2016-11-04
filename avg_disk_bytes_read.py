@@ -4,6 +4,8 @@ import json
 import socket
 import fcntl
 import struct
+import psutil
+
 
 def get_dna():
     name = subprocess.check_output("hostname | cut -d'.' -f1", shell=True)
@@ -26,7 +28,24 @@ def get_ip_address(ifname):
 ip_Address = get_ip_address('eth0')
 
 
+def get_readbytes():
+        a = psutil.disk_io_counters()
+        b = a.read_bytes
+        c = a.read_time
+        d = (b/c)
+        return d
+var10 = get_readbytes()
 
-all = {'HostName':var1,'ReportDateTime':var100,'IPAddress':ip_Address,'Values':[{'DateTime':var100}]}
+l = [1, 2, 3, 4]
+
+x = (sum(l) / float(len(l)))
+y = max(l)
+z = min(l)
+RecordCount = len(l)
+aa = "Disk Read Bytes/Sec"
+bb = "Disk"
+cc = "disk_reads_sec"
+dd = "Total"
+all = {'CounterName':aa,'CounterCategory':bb,'CounterLabel':cc,'Instance':dd,'AverageValue':x,'MaxValue':y,'MinValue':z,'RecordCount':RecordCount,'HostName':var1,'ReportDateTime':var100,'IPAddress':ip_Address,'Values':[{'DateTime':var100,'Value':var10}]}
 
 print json.dumps(all, indent=4)
