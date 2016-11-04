@@ -42,10 +42,10 @@ x = (sum(l) / float(len(l)))
 y = max(l)
 z = min(l)
 RecordCount = len(l)
-aa = "Disk Read Bytes/Sec"
-bb = "Disk"
-cc = "disk_reads_sec"
-dd = "Total"
-all = {'CounterName':aa,'CounterCategory':bb,'CounterLabel':cc,'Instance':dd,'AverageValue':x,'MaxValue':y,'MinValue':z,'RecordCount':RecordCount,'HostName':var1,'ReportDateTime':var100,'IPAddress':ip_Address,'Values':[{'DateTime':var100,'Value':var10}]}
+aa = "Disk"
+bb = "LogicalName"
+cc = "avg_disk_bytes_read"
+dd = "Avg.Disk Bytes/Read"
+all = {'PerformanceCounterInstanceName':bb,'PerformanceCounterCategory':aa,'PerformanceCounterLabel':cc,'PerformanceCounterName':dd,'AverageValue':x,'MaxValue':y,'MinValue':z,'RecordCount':RecordCount,'HostName':var1,'ReportDateTime':var100,'IPAddress':ip_Address,'Values':[{'DateTime':var100,'Value':var10}]}
 
 print json.dumps(all, indent=4)
