@@ -21,7 +21,7 @@ def get_tm():
        return str(a)
 var100 = get_tm()
 
-def get_ip_address(ifname):
+'''def get_ip_address(ifname):
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     return socket.inet_ntoa(fcntl.ioctl(
         s.fileno(),
@@ -29,7 +29,9 @@ def get_ip_address(ifname):
         struct.pack('256s', ifname[:15])
     )[20:24])
 
-ip_Address = get_ip_address('eth0')
+ip_Address = get_ip_address('eth0')'''
+
+ip_Address = None
 
 
 def get_readbytes_with_timestamp():
