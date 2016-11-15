@@ -33,6 +33,13 @@ ip_Address = get_ip_address('eth0')'''
 
 ip_Address = None
 
+def get_mount_and_device():
+    mount_and_device = {}
+    for disk_obj in psutil.disk_partitions():
+        partition_mount[disk_obj.mountpoint] = disk_obj.device
+    return mount_and_device
+
+
 
 def get_readbytes_with_timestamp():
         ts_return_list = []
@@ -61,12 +68,14 @@ x = (sum(disk_stats) / float(len(disk_stats)))
 y = max(disk_stats)
 z = min(disk_stats)
 RecordCount = len(disk_stats)
-aa = "Memory"
-bb = "% Committed Bytes In Use"
+aa = "Mounted Disks"
+bb = "mount point"
 cc = "avg_total_megabytes_used"
 dd = "Avg_Total_MegaBytes_Used"
 ee = "20sec"
 all = {'Duration: ':ee,'PerformanceCounterCategory: ':aa,'PerformanceCounterInstanceName: ':bb,'PerformanceCounterLabel: ':cc,'PerformanceCounterName: ':dd,'AverageValue: ':x,'MaxValue: ':y,'MinValue: ':z,'RecordCount: ':RecordCount,'HostName: ':var1,'ReportDateTime: ':var100,'IPAddress: ':ip_Address}
+
+print get_mount_and_device
 
 for k,v in sorted(all.items()):
 	print k, v
