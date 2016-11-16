@@ -11,6 +11,7 @@ import datetime
 import collections
 
 
+log_file_name_text = '_avg_disk_bytes_read_'
 
 def get_dna():
     name = subprocess.check_output("hostname | cut -d'.' -f1", shell=True)
@@ -81,6 +82,13 @@ dd = "Avg.Disk Bytes/Read"
 ee = "20sec"
 all = {'Duration: ':ee,'PerformanceCounterCategory: ':aa,'PerformanceCounterInstanceName: ':bb,'PerformanceCounterLabel: ':cc,'PerformanceCounterName: ':dd,'AverageValue: ':x,'MaxValue: ':y,'MinValue: ':z,'RecordCount: ':RecordCount,'HostName: ':var1,'ReportDateTime: ':var100,'IPAddress: ':ip_Address}
 od_all = collections.OrderedDict(sorted(all.items()))
+filename = os.path.expanduser("~") + var1 + log_file_name_text + var100 + '.log'
+print filename
+#file_handler = open(filename,'a+') 
+text_json = json.dumps(od_all, indent=4)
+#print >> file_handler,text_json
+
+
 print json.dumps(od_all, indent=4)
 
 
