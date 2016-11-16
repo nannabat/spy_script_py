@@ -8,7 +8,10 @@ import struct
 import psutil
 import time
 import datetime
+import collections
+import os
 
+log_file_name_text = '_avg_disk_writebytes_sec_'
 
 
 def get_dna():
@@ -76,10 +79,33 @@ ee = "20sec"
 
 all = {'Duration: ':ee,'PerformanceCounterCategory: ':aa,'PerformanceCounterInstanceName: ':bb,'PerformanceCounterLabel: ':cc,'PerformanceCounterName: ':dd,'AverageValue: ':x,'MaxValue: ':y,'MinValue: ':z,'RecordCount: ':RecordCount,'HostName: ':var1,'ReportDateTime: ':var100,'IPAddress: ':ip_Address}
 
-for k,v in sorted(all.items()):
-	print k, v
+
+
+
+od_all = collections.OrderedDict(sorted(all.items()))
+#timestamp = str(datetime.datetime.now()).replace(' ','_')
+timestamp = time.strftime("%Y%m%d-%H%M%S")
+filename = os.path.expanduser("~") + '/' + var1.strip() + log_file_name_text + timestamp + '.json'
+print filename
+file_handler = open(filename,'a+') 
+text_json = json.dumps(od_all, indent=4)
+print >> file_handler,text_json
+
+
+print json.dumps(od_all, indent=4)
+
+
+# for k,v in sorted(all.items()):
+#   print k, v
 
 value = {'Values':disk_stats_with_timestamp}
-	
+  
 print json.dumps(value, indent=4)
+values_variable = json.dumps(value,indent=4)
+print >> file_handler,values_variable
+
+file_handler.close()
+
+	
+
 
