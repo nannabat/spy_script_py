@@ -8,6 +8,7 @@ import struct
 import psutil
 import time
 import datetime
+import collections
 
 
 
@@ -78,10 +79,13 @@ bb = "Total"
 cc = "avg_disk_readbytes_Read"
 dd = "Avg.Disk Bytes/Read"
 ee = "20sec"
-all = {'Duration: ':ee,'PerformanceCounterCategory: ':aa,'PerformanceCounterInstanceName: ':bb,'PerformanceCounterLabel: ':cc,'PerformanceCounterName: ':dd,'AverageValue: ':x,'MaxValue: ':y,'MinValue: ':z,'RecordCount: ':RecordCount,'HostName: ':var1,'ReportDateTime: ':var100,'IPAddress: ':ip_Address}
+all = {'Duration: ':ee,'PerformanceCounterCategory: ':aa,'PerformanceCounterInstanceName: ':bb,'PerformanceCounterLabel: ':cc,'PerformanceCounterName: ':dd,'AverageValue: ':x,'MaxValue: ':y,'MinValue: ':z,'RecordCount: ':RecordCount,'HostName: ':var1,'ReportDateTime: ':var100,'IPAddress: ':ip_Add}
+od_all = collections.OrderedDict(sorted(all.items()))
+print json.dumps(od_all, indent=4)
 
-for k,v in sorted(all.items()):
-	print k, v
+
+# for k,v in sorted(all.items()):
+# 	print k, v
 
 value = {'Values':disk_stats_with_timestamp}
 	
