@@ -9,6 +9,7 @@ import psutil
 import time
 import datetime
 import collections
+import os
 
 
 log_file_name_text = '_avg_disk_bytes_read_'
@@ -82,11 +83,13 @@ dd = "Avg.Disk Bytes/Read"
 ee = "20sec"
 all = {'Duration: ':ee,'PerformanceCounterCategory: ':aa,'PerformanceCounterInstanceName: ':bb,'PerformanceCounterLabel: ':cc,'PerformanceCounterName: ':dd,'AverageValue: ':x,'MaxValue: ':y,'MinValue: ':z,'RecordCount: ':RecordCount,'HostName: ':var1,'ReportDateTime: ':var100,'IPAddress: ':ip_Address}
 od_all = collections.OrderedDict(sorted(all.items()))
-filename = os.path.expanduser("~") + var1 + log_file_name_text + var100 + '.log'
+#timestamp = str(datetime.datetime.now()).replace(' ','_')
+timestamp = time.strftime("%Y%m%d-%H%M%S")
+filename = os.path.expanduser("~") + '/' + var1.strip() + log_file_name_text + timestamp + '.json'
 print filename
-#file_handler = open(filename,'a+') 
+file_handler = open(filename,'a+') 
 text_json = json.dumps(od_all, indent=4)
-#print >> file_handler,text_json
+print >> file_handler,text_json
 
 
 print json.dumps(od_all, indent=4)
@@ -98,4 +101,9 @@ print json.dumps(od_all, indent=4)
 value = {'Values':disk_stats_with_timestamp}
 	
 print json.dumps(value, indent=4)
+values_variable = json.dumps(value,indent=4)
+print >> file_handler,values_variable
+
+file_handler.close()
+
 
