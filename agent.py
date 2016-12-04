@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import pyinotify,subprocess
+import pyinotify,subprocess,json
 from crontab import CronTab
 
 ABS_PATH_AGENT_CONF_FILE='/root/spy_script_py/agentconfig.json'
@@ -34,7 +34,7 @@ if __name__ == '__main__':
 	wm.add_watch(ABS_PATH_AGENT_CONF_FILE, pyinotify.IN_MODIFY, onChange)
 	notifier = pyinotify.Notifier(wm)
 	print "the value of CONF_MODIFIED: " + str(CONF_MODIFIED)
-	print get_intial_values_list
+	print get_intial_values_list()
 	notifier.loop()
 
 		
