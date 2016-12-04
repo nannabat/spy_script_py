@@ -21,7 +21,7 @@ if __name__ == '__main__':
 	wm = pyinotify.WatchManager()
 	wm.add_watch(ABS_PATH_AGENT_CONF_FILE, pyinotify.IN_MODIFY, onChange)
 	notifier = pyinotify.Notifier(wm)
-	print "the value of CONF_MODIFIED: " + CONF_MODIFIED
+	print "the value of CONF_MODIFIED: " + str(CONF_MODIFIED)
 	notifier.loop()
 	# if CONF_MODIFIED == True:
 	# 	config_file = open('agentconfig.json','r')
