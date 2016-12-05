@@ -33,9 +33,11 @@ def get_changed_values_dict():
 
 def set_cron_job(script_name,set_time_in_min):
         my_user_cron = CronTab(user=True)
-        command = '/usr/bin/python ' + script_name
-        job = my_user_cron.new(command)
+        command_var = '/usr/bin/python ' + script_name
+        print command_var
+        job = my_user_cron.new(command=command_var)
         job.minute.every(set_time_in_min)
+        my_user_cron.write()
 
 def onChange(ev):
     #cmd = ['/bin/echo',ABS_PATH_AGENT_CONF_FILE, ev.pathname, 'changed']
@@ -44,7 +46,7 @@ def onChange(ev):
     print 'changed values are:'
     tmp_dict = get_changed_values_dict()
     for script_name,time_value in tmp_dict.items():
-    	tmp_script_name = scriptname + '.py'
+    	tmp_script_name = script_name + '.py'
     	set_cron_job(tmp_script_name,time_value)
 
 		
