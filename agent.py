@@ -4,17 +4,19 @@ from crontab import CronTab
 
 ABS_PATH_AGENT_CONF_FILE='/root/spy_script_py/agentconfig.json'
 CONF_MODIFIED=False
-intial_value_list = {}
+#intial_value_list = get_values_list()
+
 
 
 
 def onChange(ev):
-    cmd = ['/bin/echo',ABS_PATH_AGENT_CONF_FILE, ev.pathname, 'changed']
-    subprocess.Popen(cmd).communicate()
-    CONF_MODIFIED = True
+    #cmd = ['/bin/echo',ABS_PATH_AGENT_CONF_FILE, ev.pathname, 'changed']
+    #subprocess.Popen(cmd).communicate()
+    #CONF_MODIFIED = True
     print 'changed values are:'
-    for script_name,time_value in get_changed_values_dict().items:
-    	print scriptname + ':' + time_value
+    tmp_dict = get_changed_values_dict()
+    for script_name,time_value in tmp_dict.items():
+    	print script_name + ':' + time_value
 
 def get_values_list():
 	config_file = open(ABS_PATH_AGENT_CONF_FILE,'r')
@@ -27,28 +29,33 @@ def get_values_list():
 def get_changed_values_dict():
 	current_values_dict = get_values_list()
 	return_changed_values_dict = {}
+        #tmp_intial_value_list = intial_value_list
 	for script_name in current_values_dict.keys():
-		if intial_value_list[script_name] == current_values_dict[script_name]:
+		if intial_value_list[script_name] != current_values_dict[script_name]:
 			return_changed_values_dict[script_name] = current_values_dict[script_name]
+        global intial_value_list
 	intial_value_list = current_values_dict
 	return return_changed_values_dict
 
 
-
-
+def set_cron_job(script_name,set_time_in_min):
+        my_user_cron = CronTab(user=True)
+        command = '/usr/bin/python ' + script_name
+        job = my_user_cron.new(command)
+        job.minute.every(set_time_in_min)
 
 		
 
-
-
+global intial_value_list
+intial_value_list = get_values_list()
     		
 if __name__ == '__main__':
 	wm = pyinotify.WatchManager()
 	wm.add_watch(ABS_PATH_AGENT_CONF_FILE, pyinotify.IN_MODIFY, onChange)
 	notifier = pyinotify.Notifier(wm)
 	#print "the value of CONF_MODIFIED: " + str(CONF_MODIFIED)
-	global intial_value_list
-        intial_value_list = get_values_list() 
+	#global intial_value_list
+        #intial_value_list = get_values_list() 
         print intial_value_list
 	notifier.loop()
 
