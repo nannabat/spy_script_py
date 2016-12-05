@@ -9,14 +9,7 @@ CONF_MODIFIED=False
 
 
 
-def onChange(ev):
-    #cmd = ['/bin/echo',ABS_PATH_AGENT_CONF_FILE, ev.pathname, 'changed']
-    #subprocess.Popen(cmd).communicate()
-    #CONF_MODIFIED = True
-    print 'changed values are:'
-    tmp_dict = get_changed_values_dict()
-    for script_name,time_value in tmp_dict.items():
-    	print script_name + ':' + time_value
+
 
 def get_values_list():
 	config_file = open(ABS_PATH_AGENT_CONF_FILE,'r')
@@ -43,6 +36,16 @@ def set_cron_job(script_name,set_time_in_min):
         command = '/usr/bin/python ' + script_name
         job = my_user_cron.new(command)
         job.minute.every(set_time_in_min)
+
+def onChange(ev):
+    #cmd = ['/bin/echo',ABS_PATH_AGENT_CONF_FILE, ev.pathname, 'changed']
+    #subprocess.Popen(cmd).communicate()
+    #CONF_MODIFIED = True
+    print 'changed values are:'
+    tmp_dict = get_changed_values_dict()
+    for script_name,time_value in tmp_dict.items():
+    	tmp_script_name = scriptname + '.py'
+    	set_cron_job(tmp_script_name,time_value)
 
 		
 
